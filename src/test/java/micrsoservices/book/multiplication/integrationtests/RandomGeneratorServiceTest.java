@@ -1,5 +1,6 @@
-package micrsoservices.book.socialmultiplication;
+package micrsoservices.book.multiplication.integrationtests;
 
+import micrsoservices.book.multiplication.service.RandomGeneratorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

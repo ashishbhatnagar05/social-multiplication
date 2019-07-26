@@ -1,4 +1,4 @@
-package micrsoservices.book.socialmultiplication;
+package micrsoservices.book.multiplication.integrationtests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

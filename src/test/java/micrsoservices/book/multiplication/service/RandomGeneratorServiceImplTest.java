@@ -1,4 +1,4 @@
-package micrsoservices.book.socialmultiplication;
+package micrsoservices.book.multiplication.service;
 
 import org.junit.Before;
 import org.junit.Test;

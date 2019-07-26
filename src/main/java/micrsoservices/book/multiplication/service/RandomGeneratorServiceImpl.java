@@ -1,4 +1,4 @@
-package micrsoservices.book.socialmultiplication;
+package micrsoservices.book.multiplication.service;
 
 import org.springframework.stereotype.Service;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package micrsoservices.book.socialmultiplication;
+package micrsoservices.book.multiplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

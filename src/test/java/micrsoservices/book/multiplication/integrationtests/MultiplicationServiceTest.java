@@ -1,5 +1,8 @@
-package micrsoservices.book.socialmultiplication;
+package micrsoservices.book.multiplication.integrationtests;
 
+import micrsoservices.book.multiplication.domain.Multiplication;
+import micrsoservices.book.multiplication.service.MultiplicationService;
+import micrsoservices.book.multiplication.service.RandomGeneratorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,5 @@ public class MultiplicationServiceTest {
     // then
     assertThat(multiplication.getFactorA()).isEqualTo(50);
     assertThat(multiplication.getFactorB()).isEqualTo(30);
-    assertThat(multiplication.getResult()).isEqualTo(1500);
   }
 }
