@@ -1,26 +1,27 @@
-package micrsoservices.book.multiplication.service;
+package microservices.book.multiplication.integrationtests;
 
-import org.junit.Before;
+import microservices.book.multiplication.service.RandomGeneratorService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RandomGeneratorServiceImplTest {
-  private RandomGeneratorServiceImpl randomGeneratorServiceImpl;
-
-  @Before
-  public void setUp() {
-    randomGeneratorServiceImpl = new RandomGeneratorServiceImpl();
-  }
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class RandomGeneratorServiceTest {
+  @Autowired private RandomGeneratorService randomGeneratorService;
 
   @Test
   public void generateRandomFactorIsBetweenExpectedLimits() throws Exception {
     // when a good sample of randomly generated factors is generated
     List<Integer> randomFactors =
         IntStream.range(0, 1000)
-            .map(i -> randomGeneratorServiceImpl.generateRandomFactor())
+            .map(i -> randomGeneratorService.generateRandomFactor())
             .boxed()
             .collect(Collectors.toList());
     // then all of them should be between 11 and 100

@@ -1,8 +1,8 @@
-package micrsoservices.book.multiplication.integrationtests;
+package microservices.book.multiplication.integrationtests;
 
-import micrsoservices.book.multiplication.domain.Multiplication;
-import micrsoservices.book.multiplication.service.MultiplicationService;
-import micrsoservices.book.multiplication.service.RandomGeneratorService;
+import microservices.book.multiplication.domain.Multiplication;
+import microservices.book.multiplication.service.MultiplicationService;
+import microservices.book.multiplication.service.RandomGeneratorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

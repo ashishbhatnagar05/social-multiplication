@@ -1,8 +1,8 @@
-package micrsoservices.book.multiplication.controller;
+package microservices.book.multiplication.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import micrsoservices.book.multiplication.domain.Multiplication;
-import micrsoservices.book.multiplication.service.MultiplicationService;
+import microservices.book.multiplication.domain.Multiplication;
+import microservices.book.multiplication.service.MultiplicationService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,8 +50,7 @@ public class MultiplicationControllerTest {
   }
 }
 
-
-        //{
-        //"factorA": 70,
-        //"factorB": 20
-        //}
+        // {
+        // "factorA": 70,
+        // "factorB": 20
+        // }

@@ -1,4 +1,4 @@
-package micrsoservices.book.multiplication.integrationtests;
+package microservices.book.multiplication.integrationtests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
