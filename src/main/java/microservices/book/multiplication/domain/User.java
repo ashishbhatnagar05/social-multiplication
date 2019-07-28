@@ -7,21 +7,25 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-/** Stores information to identify the user. */
+/**
+ * Stores information to identify the user.
+ */
 @RequiredArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity
 public final class User {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "USER_ID")
-  private Long id;
 
-  private final String alias;
-  // Empty constructor for JSON/JPA
-  protected User() {
-    alias = null;
-  }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
+    private Long id;
+
+    private final String alias;
+
+    // Empty constructor for JSON/JPA
+    protected User() {
+        alias = null;
+    }
 }

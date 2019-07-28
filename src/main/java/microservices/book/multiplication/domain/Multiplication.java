@@ -7,22 +7,27 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-/** This class represents a Multiplication (a * b). */
+/**
+ * This class represents a Multiplication (a * b).
+ */
 @RequiredArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity
 public final class Multiplication {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "MULTIPLICATION_ID")
-  private Long id;
-  // Both factors
-  private final int factorA;
-  private final int factorB;
-  // Empty constructor for JSON/JPA
-  Multiplication() {
-    this(0, 0);
-  }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MULTIPLICATION_ID")
+    private Long id;
+
+    // Both factors
+    private final int factorA;
+    private final int factorB;
+
+    // Empty constructor for JSON/JPA
+    Multiplication() {
+        this(0, 0);
+    }
 }

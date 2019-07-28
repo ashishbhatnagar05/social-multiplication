@@ -23,34 +23,37 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringRunner.class)
 @WebMvcTest(MultiplicationController.class)
 public class MultiplicationControllerTest {
-  @MockBean private MultiplicationService multiplicationService;
-  @Autowired private MockMvc mvc;
-  // This object will be magically initialized by the initFields method below.
-  private JacksonTester<Multiplication> json;
 
-  @Before
-  public void setup() {
-    JacksonTester.initFields(this, new ObjectMapper());
-  }
+    @MockBean
+    private MultiplicationService multiplicationService;
 
-  @Test
-  public void getRandomMultiplicationTest() throws Exception {
-    // given
-    given(multiplicationService.createRandomMultiplication())
-        .willReturn(new Multiplication(70, 20));
-    // when
-    MockHttpServletResponse response =
-        mvc.perform(get("/multiplications/random").accept(MediaType.APPLICATION_JSON))
-            .andReturn()
-            .getResponse();
-    // then
-    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-    assertThat(response.getContentAsString())
-        .isEqualTo(json.write(new Multiplication(70, 20)).getJson());
-  }
+    @Autowired
+    private MockMvc mvc;
+
+    // This object will be magically initialized by the initFields method below.
+    private JacksonTester<Multiplication> json;
+
+    @Before
+    public void setup() {
+        JacksonTester.initFields(this, new ObjectMapper());
+    }
+
+    @Test
+    public void getRandomMultiplicationTest() throws Exception{
+        // given
+        given(multiplicationService.createRandomMultiplication())
+                .willReturn(new Multiplication(70, 20));
+
+        // when
+        MockHttpServletResponse response = mvc.perform(
+                get("/multiplications/random")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        // then
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.getContentAsString())
+                .isEqualTo(json.write(new Multiplication(70, 20)).getJson());
+    }
+
 }
-
-        // {
-        // "factorA": 70,
-        // "factorB": 20
-        // }

@@ -1,8 +1,5 @@
 package microservices.book.multiplication.controller;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import microservices.book.multiplication.domain.MultiplicationResultAttempt;
 import microservices.book.multiplication.service.MultiplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,39 +8,44 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This class provides a REST API to POST the attempts from users.
+ */
 @RestController
 @RequestMapping("/results")
 final class MultiplicationResultAttemptController {
-  private final MultiplicationService multiplicationService;
 
-  @Autowired
-  MultiplicationResultAttemptController(final MultiplicationService multiplicationService) {
-    this.multiplicationService = multiplicationService;
-  }
+    private final MultiplicationService multiplicationService;
 
-  @GetMapping
-  ResponseEntity<List<MultiplicationResultAttempt>> getStatistics(
-      @RequestParam("alias") String alias) {
-    return ResponseEntity.ok(multiplicationService.getStatsForUser(alias));
-  }
+    @Autowired
+    MultiplicationResultAttemptController(final MultiplicationService multiplicationService) {
+        this.multiplicationService = multiplicationService;
+    }
 
-  @PostMapping
-  ResponseEntity<ResultResponse> postResult(
-      @RequestBody MultiplicationResultAttempt multiplicationResultAttempt) {
-    return ResponseEntity.ok(
-        new ResultResponse(multiplicationService.checkAttempt(multiplicationResultAttempt)));
-  }
+    @PostMapping
+    ResponseEntity<MultiplicationResultAttempt> postResult(@RequestBody MultiplicationResultAttempt multiplicationResultAttempt) {
+        boolean isCorrect = multiplicationService.checkAttempt(multiplicationResultAttempt);
+        MultiplicationResultAttempt attemptCopy = new MultiplicationResultAttempt(
+                multiplicationResultAttempt.getUser(),
+                multiplicationResultAttempt.getMultiplication(),
+                multiplicationResultAttempt.getResultAttempt(),
+                isCorrect
+        );
+        return ResponseEntity.ok(attemptCopy);
+    }
 
-  @GetMapping("/{resultId}")
-  ResponseEntity<MultiplicationResultAttempt> getResultById(
-      final @PathVariable("resultId") Long resultId) {
-    return ResponseEntity.ok(multiplicationService.getResultById(resultId));
-  }
+    @GetMapping
+    ResponseEntity<List<MultiplicationResultAttempt>> getStatistics(@RequestParam("alias") String alias) {
+        return ResponseEntity.ok(
+                multiplicationService.getStatsForUser(alias)
+        );
+    }
 
-  @RequiredArgsConstructor
-  @NoArgsConstructor(force = true)
-  @Getter
-  public static final class ResultResponse {
-    private final boolean correct;
-  }
+    @GetMapping("/{resultId}")
+    ResponseEntity<MultiplicationResultAttempt> getResultById(final @PathVariable("resultId") Long resultId) {
+        return ResponseEntity.ok(
+                multiplicationService.getResultById(resultId)
+        );
+    }
+
 }
