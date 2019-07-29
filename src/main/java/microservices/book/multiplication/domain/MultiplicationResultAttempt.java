@@ -19,7 +19,7 @@ import javax.persistence.*;
 public final class MultiplicationResultAttempt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

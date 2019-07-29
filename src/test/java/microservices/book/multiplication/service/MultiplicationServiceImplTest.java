@@ -70,12 +70,14 @@ public class MultiplicationServiceImplTest {
         MultiplicationSolvedEvent event = new MultiplicationSolvedEvent(attempt.getId(),
                 attempt.getUser().getId(), true);
         given(userRepository.findByAlias("john_doe")).willReturn(Optional.empty());
+        // Note: the service will set correct to true
+        given(attemptRepository.save(verifiedAttempt)).willReturn(verifiedAttempt);
 
         // when
-        boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
+        MultiplicationResultAttempt resultAttempt = multiplicationServiceImpl.checkAttempt(attempt);
 
         // then
-        assertThat(attemptResult).isTrue();
+        assertThat(resultAttempt.isCorrect()).isTrue();
         verify(attemptRepository).save(verifiedAttempt);
         verify(eventDispatcher).send(eq(event));
     }
@@ -87,15 +89,18 @@ public class MultiplicationServiceImplTest {
         User user = new User("john_doe");
         MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(
                 user, multiplication, 3010, false);
+        MultiplicationResultAttempt storedAttempt = new MultiplicationResultAttempt(
+                user, multiplication, 3010, false);
         MultiplicationSolvedEvent event = new MultiplicationSolvedEvent(attempt.getId(),
                 attempt.getUser().getId(), false);
         given(userRepository.findByAlias("john_doe")).willReturn(Optional.empty());
+        given(attemptRepository.save(attempt)).willReturn(storedAttempt);
 
         // when
-        boolean attemptResult = multiplicationServiceImpl.checkAttempt(attempt);
+        MultiplicationResultAttempt resultAttempt = multiplicationServiceImpl.checkAttempt(attempt);
 
         // then
-        assertThat(attemptResult).isFalse();
+        assertThat(resultAttempt.isCorrect()).isFalse();
         verify(attemptRepository).save(attempt);
         verify(eventDispatcher).send(eq(event));
     }
