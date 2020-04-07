@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                bat 'rd /s /q social-multiplication'
+               // bat 'rd /s /q social-multiplication'
                 bat 'git clone git@github.com:ashishbhatnagar05/social-multiplication.git'
                 bat 'mvn clean -f social-multiplication'
 
